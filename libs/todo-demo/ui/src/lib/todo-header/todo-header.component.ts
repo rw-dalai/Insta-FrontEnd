@@ -8,7 +8,7 @@ import { Todo } from '@todo-demo/data';
 })
 export class TodoHeaderComponent {
 	// Property Binding
-	@Input() ueberschrift = '';
+	// @Input() ueberschrift = '';
 
 	// Event Binding
 	@Output() add = new EventEmitter<Todo>();

@@ -53,10 +53,12 @@
 			"executor": "@angular-devkit/build-angular:dev-server",
 			"configurations": {
 				"production": {
-					"browserTarget": "todo-demo:build:production"
+					"browserTarget": "todo-demo:build:production",
+					"proxyConfig": "apps/todo-demo/proxy.config.json"
 				},
 				"development": {
-					"browserTarget": "todo-demo:build:development"
+					"browserTarget": "todo-demo:build:development",
+					"proxyConfig": "apps/todo-demo/proxy.config.json"
 				}
 			},
 			"defaultConfiguration": "development"
