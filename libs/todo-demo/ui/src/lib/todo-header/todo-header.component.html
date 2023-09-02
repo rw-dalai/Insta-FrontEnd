@@ -1,1 +1,11 @@
-<p>todo-header works!</p>
+<h1>{{ ueberschrift }}</h1>
+
+<!--  (input)='onInput($event)'-->
+<!--  [value]='title'-->
+<input
+	[(ngModel)]="title"
+	placeholder="What needs to be done"
+	(keyup.enter)="onEnter()"
+/>
+
+<!--<button (click)='onClick()'>Click me</button>-->
