@@ -19,12 +19,13 @@ import { Todo, TodoHttpService } from '@todo-demo/data';
 // WHY IMMUTABLE UPDATES
 // ---------------------
 // 1. New References:
-// When you perform an update immutably, you create a new reference for the object or array.
+// When we perform an update immutably, we create a new reference for the object or array.
 // This new reference helps Angular and other frameworks to quickly identify changes through their change detection strategies,
 // which generally rely on checking if the references have changed.
 
 // 2. Predictability:
-// With immutable updates, you can have better control over the state as it prevents unwanted side effects from occurring in other parts of your application.
+// With immutable updates, you can have better control over the state
+// as it prevents unwanted side effects from occurring in other parts of our application.
 
 // 3. Functional Programming Paradigm:
 // Immutable updates align with principles of functional programming,
