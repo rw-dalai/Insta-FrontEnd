@@ -1,3 +1,17 @@
-<ul>
-	<li *ngFor="let todo of todos">{{ todo.title }} / {{ todo.completed }}</li>
+<!--<ul>-->
+<!--	<li *ngFor="let todo of todos">{{ todo.title }} / {{ todo.completed }}</li>-->
+<!--</ul>-->
+
+<ul class="todo-list">
+	<li *ngFor="let todo of todos" [class.completed]="todo.completed">
+		<input
+			class="toggle"
+			type="checkbox"
+			[checked]="todo.completed"
+			(change)="onToggleComplete(todo)"
+		/>
+		<label>{{ todo.title }}</label>
+		<!-- <input [value]='todo.title' (change)='onChangeTitle(todo, $event)'>-->
+		<button class="destroy" (click)="onDelete(todo)"></button>
+	</li>
 </ul>

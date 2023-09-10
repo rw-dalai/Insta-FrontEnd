@@ -7,19 +7,21 @@ import { Todo } from '@todo-demo/data';
 	styleUrls: ['./todo-header.component.css'],
 })
 export class TodoHeaderComponent {
-	// Property Binding
-	// @Input() ueberschrift = '';
-
 	// Event Binding
+	// Emitting data back to the parent
 	@Output() add = new EventEmitter<Todo>();
 
+	// Used for 2-way data binding -> [()]
 	title = '';
 
-	onEnter() {
-		// console.log('onEnter', this.title);
-
+	onAdd() {
+		// We create a new todu (without id).
 		const todo: Todo = { title: this.title, completed: false };
 
+		// We emit the event to the parent.
 		this.add.emit(todo);
+
+		// Clear the input field
+		this.title = '';
 	}
 }

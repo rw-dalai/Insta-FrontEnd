@@ -1,11 +1,9 @@
-<h1>TODOS</h1>
+<header class="header">
+	<h1>SHOPPING LIST</h1>
 
-<!--  (input)='onInput($event)'-->
-<!--  [value]='title'-->
-<input
-	[(ngModel)]="title"
-	placeholder="What needs to be done"
-	(keyup.enter)="onEnter()"
-/>
-
-<!--<button (click)='onClick()'>Click me</button>-->
+	<input
+		[(ngModel)]="title"
+		placeholder="What needs to be done"
+		(keyup.enter)="onAdd()"
+	/>
+</header>

@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+
+button {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: none;
+	appearance: none;
+}
+
+body {
+	margin: 0 auto;
+	max-width: 640px;
+
+	font: 1rem 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-weight: 300;
+	color: #4d4d4d;
+}
