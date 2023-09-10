@@ -10,6 +10,42 @@ import { Todo, TodoHttpService } from '@todo-demo/data';
 // and use multiple UI components (in ui libraries) for presentation
 // and services (in data libraries) for dealing with data and http.
 
+// IMMUTABLE UPDATES
+// -----------------
+// In the context of JavaScript and front-end development,
+// immutability refers to the practice of creating a new object or collection
+// when it needs to be updated, as opposed to altering the original object.
+
+// WHY IMMUTABLE UPDATES
+// ---------------------
+// 1. New References:
+// When you perform an update immutably, you create a new reference for the object or array.
+// This new reference helps Angular and other frameworks to quickly identify changes through their change detection strategies,
+// which generally rely on checking if the references have changed.
+
+// 2. Predictability:
+// With immutable updates, you can have better control over the state as it prevents unwanted side effects from occurring in other parts of your application.
+
+// 3. Functional Programming Paradigm:
+// Immutable updates align with principles of functional programming,
+// promoting pure functions that do not have side effects.
+
+// 4. Angular Change Detection Strategy "OnPush"
+// With "OnPush", Angular only checks if the reference to the input property has changed,
+// reducing the number of change detection cycles and thus improving performance,
+// especially for larger applications.
+
+// This Component will only receive a new change of `todus` if the reference of the `todus` array has changed.
+// @Component({ changeDetection: ChangeDetectionStrategy.OnPush })
+// export class MyComponent {
+//  @Input todos: Todo[]
+// }
+
+// All those examples create a new todu array:
+// this.todos = [...this.todos, newTodo];
+// this.todos = this.todos.filter(() => { .. });
+// this.todos = this.todos.map(() => { ... });
+
 @Component({
 	selector: 'feat-todo',
 	template: `
@@ -79,6 +115,7 @@ export class TodoComponent implements OnInit {
 		this.todoService.createTodo(addedTodo).then((todoBack) => {
 			console.log('TodoComponent # ADD (server response)', todoBack);
 
+			// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
 			// Immutable update state by creating a new array
 			// with the new `todu` returned from the server.
 			this.todos = [...this.todos, todoBack];
@@ -98,6 +135,7 @@ export class TodoComponent implements OnInit {
 		this.todoService.deleteTodo(deletedTodo.id!).then(() => {
 			console.log('TodoComponent # DELETE (server response)');
 
+			// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
 			// Immutable update state by creating a new array
 			// without the deleted `todu`.
 			this.todos = this.todos.filter((todo) => todo.id !== deletedTodo.id);
@@ -117,6 +155,7 @@ export class TodoComponent implements OnInit {
 		this.todoService.updateTodo(updatedTodo).then((todoBack) => {
 			console.log('TodoComponent # UPDATE (server response)', todoBack);
 
+			// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
 			// Immutable update state by creating a new array
 			// with updated todu returned from the server.
 			this.todos = this.todos.map((todo) => {
