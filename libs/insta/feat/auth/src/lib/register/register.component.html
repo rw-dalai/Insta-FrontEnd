@@ -1,0 +1,40 @@
+<div>
+	<mat-card>
+		<mat-card-title>Register</mat-card-title>
+		<mat-card-content>
+			<form (ngSubmit)="onRegister()" [formGroup]="registerForm">
+				<!--  EMAIL    -->
+				<mat-form-field>
+					<mat-label>Enter your email</mat-label>
+					<input
+						matInput
+						placeholder="pat@example.com"
+						formControlName="email"
+						required
+					/>
+					<mat-error
+						*ngIf="
+							registerForm.get('email')?.touched &&
+							registerForm.get('email')?.hasError('required')
+						"
+					>
+						Email is required
+					</mat-error>
+					<mat-error
+						*ngIf="
+							registerForm.get('email')?.touched &&
+							registerForm.get('email')?.hasError('email')
+						"
+					>
+						Email must be a valid email
+					</mat-error>
+				</mat-form-field>
+
+				<!--  REGISTER BUTTON -->
+				<button type="submit" mat-raised-button color="primary">
+					Register
+				</button>
+			</form>
+		</mat-card-content>
+	</mat-card>
+</div>

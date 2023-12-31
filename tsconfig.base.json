@@ -15,6 +15,7 @@
 		"skipDefaultLibCheck": true,
 		"baseUrl": ".",
 		"paths": {
+			"@insta/feat/auth": ["libs/insta/feat/auth/src/index.ts"],
 			"@todo-demo/data": ["libs/todo-demo/data/src/index.ts"],
 			"@todo-demo/feat": ["libs/todo-demo/feat/src/index.ts"],
 			"@todo-demo/ui": ["libs/todo-demo/ui/src/index.ts"]

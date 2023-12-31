@@ -1,16 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { appRoutes } from './app.routes';
-import { NxWelcomeComponent } from './nx-welcome.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RegisterComponent } from '@insta/feat/auth';
+
+// Never ever import by relative paths
+// import { RegisterComponent } from '../../../../libs/insta/feat/auth/src';
 
 @NgModule({
-	declarations: [AppComponent, NxWelcomeComponent],
-	imports: [
-		BrowserModule,
-		RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
-	],
+	declarations: [AppComponent],
+	imports: [BrowserModule, BrowserAnimationsModule, RegisterComponent],
 	providers: [],
 	bootstrap: [AppComponent],
 })
