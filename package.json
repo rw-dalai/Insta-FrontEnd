@@ -20,7 +20,8 @@
 		"@nx/angular": "16.6.0",
 		"rxjs": "~7.8.0",
 		"tslib": "^2.3.0",
-		"zone.js": "~0.13.0"
+		"zone.js": "~0.13.0",
+		"zxcvbn": "^4.4.2"
 	},
 	"devDependencies": {
 		"@angular-devkit/build-angular": "~16.1.0",
@@ -42,6 +43,7 @@
 		"@schematics/angular": "~16.1.0",
 		"@types/jest": "^29.4.0",
 		"@types/node": "16.11.7",
+		"@types/zxcvbn": "^4.4.4",
 		"@typescript-eslint/eslint-plugin": "^5.60.1",
 		"@typescript-eslint/parser": "^5.60.1",
 		"cypress": "^12.16.0",

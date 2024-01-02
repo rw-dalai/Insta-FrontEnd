@@ -4,37 +4,84 @@
 		<mat-card-content>
 			<form (ngSubmit)="onRegister()" [formGroup]="registerForm">
 				<!--  EMAIL    -->
-				<mat-form-field>
-					<mat-label>Enter your email</mat-label>
-					<input
-						matInput
-						placeholder="pat@example.com"
-						formControlName="email"
-						required
-					/>
-					<mat-error
-						*ngIf="
-							registerForm.get('email')?.touched &&
-							registerForm.get('email')?.hasError('required')
-						"
-					>
-						Email is required
-					</mat-error>
-					<mat-error
-						*ngIf="
-							registerForm.get('email')?.touched &&
-							registerForm.get('email')?.hasError('email')
-						"
-					>
-						Email must be a valid email
-					</mat-error>
-				</mat-form-field>
+				<div>
+					<mat-form-field>
+						<mat-label>Enter your email</mat-label>
+						<input
+							matInput
+							placeholder="pat@example.com"
+							formControlName="email"
+							required
+						/>
+						<mat-error *ngIf="hasError('email')">
+							{{ getErrorMessage('email') }}
+						</mat-error>
+					</mat-form-field>
+				</div>
+
+				<!--  PASSWORD  -->
+				<div>
+					<mat-form-field>
+						<mat-label>Enter your password</mat-label>
+						<input
+							matInput
+							[type]="hide ? 'password' : 'text'"
+							formControlName="password"
+						/>
+						<button
+							mat-icon-button
+							matSuffix
+							(click)="hide = !hide"
+							[attr.aria-label]="'Hide password'"
+							[attr.aria-pressed]="hide"
+						>
+							<mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+						</button>
+						<mat-error *ngIf="hasError('password')">
+							{{ getErrorMessage('password') }}
+						</mat-error>
+					</mat-form-field>
+				</div>
+
+				<!--  CONFIRM PASSWORD  -->
+				<div>
+					<mat-form-field>
+						<mat-label>Confirm Password</mat-label>
+						<input matInput type="password" formControlName="passwordConfirm" />
+						<mat-error *ngIf="hasError('passwordConfirm')">
+							{{ getErrorMessage('passwordConfirm') }}
+						</mat-error>
+					</mat-form-field>
+				</div>
 
 				<!--  REGISTER BUTTON -->
-				<button type="submit" mat-raised-button color="primary">
-					Register
-				</button>
+				<div>
+					<button
+						[disabled]="!registerForm.valid"
+						type="submit"
+						mat-raised-button
+						color="primary"
+					>
+						Register
+					</button>
+				</div>
 			</form>
 		</mat-card-content>
 	</mat-card>
 </div>
+
+<!-- Alternative of mat-error handling -->
+<!-- without hasError and getErrorMessage -->
+
+<!--<mat-error-->
+<!--  *ngIf="-->
+<!--  registerForm.get('email')?.touched &&-->
+<!--  registerForm.get('email')?.hasError('required')">-->
+<!--  Email is required-->
+<!--</mat-error>-->
+<!--<mat-error-->
+<!--  *ngIf="-->
+<!--  registerForm.get('email')?.touched &&-->
+<!--  registerForm.get('email')?.hasError('email')">-->
+<!--  Email must be a valid email-->
+<!--</mat-error>-->
