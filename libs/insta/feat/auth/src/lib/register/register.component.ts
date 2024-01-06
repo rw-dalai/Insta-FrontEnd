@@ -1,3 +1,5 @@
+// Angular Forms ---------------------------------------------
+// https://angular.io/guide/forms-overview
 // 2 kinds of Angular Forms
 // - Template Driven Forms
 // - Reactive Forms
@@ -21,10 +23,27 @@
 // - ng-untouched vs ng-touched
 // Has the form or form control been visited?
 
+// Learn Typescript -------------------------------------------
+// https://www.typescriptlang.org/docs/handbook/intro.html
+
+// Typescript Basic Types ----------------------------------
+// https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-oop.html
+// string, number, boolean, null, undefined, any, unknown, never, void
+// Try to avoid `any` and `unknown` as much as possible
+
+// Typescript Advanced Concepts -------------------------
+// interface = type for an object
+// type = alias for a type
+// keyof = union of all the keys in the object
+// Record = HashMap / Dictionary with a key and value type
+
+// Imports ----------------------------------------------------
+// import { CustomValidators } from '@insta/util'; // -> OKAY
+// import { CustomValidators } from '../../../../../util'; // -> NOT OKAY
+// See `tsconfig.base.json` for the alias paths
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-	AbstractControl,
 	FormBuilder,
 	FormControl,
 	FormGroup,
@@ -36,16 +55,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-// TODO IntelliJ Bug ?
-// import { CustomValidators } from '@insta/util';
-import { CustomValidators } from '../../../../../util';
-
-// Typescript DataTypes
-// type = alias for a type
-// keyof = union of all the keys in the object
-// Record = HashMap / Dictionary with a key and value type
+import { CustomValidators } from '@insta/util';
+import { PasswordStrengthBarComponent } from '@insta/ui/strengthbar';
 
 // Type for the form data
+// interface RegisterFormData {
 type RegisterFormData = {
 	email: string;
 	password: string;
@@ -69,6 +83,7 @@ type RegisterFormType = Record<keyof RegisterFormData, FormControl<string>>;
 		MatCardModule,
 		MatButtonModule,
 		MatIconModule,
+		PasswordStrengthBarComponent,
 	],
 	templateUrl: './register.component.html',
 	styleUrls: ['./register.component.css'],
@@ -96,18 +111,25 @@ export class RegisterComponent {
 		// wrong: { ... } // does not work, we are typesafe
 	};
 
-	// --------- Type Safe Forms from Angular v14 ---------
+	// Type Safe Forms from Angular v14 ---------------------
 	// registerForm = inject(FormBuilder).nonNullable.group({
 	registerForm: FormGroup<RegisterFormType> = inject(FormBuilder).nonNullable.group({
 		email: ['', [Validators.required, Validators.email]],
 		password: ['', [Validators.required, CustomValidators.passwordStrength(3)]],
 		passwordConfirm: ['', [Validators.required, CustomValidators.match('password')]],
-		// wrong: { ... } // does not work, we are typesafe
 	});
 
-	// --------- StandardForms before Angular v14 ---------
+	// Inject vs Constructor
+	// ----------------------------------------------------
+	// With inject we can inject services into components.
+	// private fb: FormBuilder = inject(FormBuilder);
+
+	// Before inject we had to do this:
+	// constructor(private fb: FormBuilder) {}
+
+	// StandardForms before Angular v14 ---------------------
 	// constructor() {
-	//   this.registerForm = new FormGroup({
+	//   this.registerForm = new FormGroup<RegisterFormType>({
 	// 		email: new FormControl('', [
 	// 			Validators.required,
 	// 			Validators.email,
@@ -123,16 +145,13 @@ export class RegisterComponent {
 	// 		// Group Validator
 	// 	} /*CustomValidators.match2('password', 'passwordConfirm')*/
 	// );
-	//}
-
-	// TODO move to util (insta/util/..)
+	// }
 	// Gets the control by name in a typesafe way
 	getControlByName(controlName: keyof RegisterFormData) {
 		// return this.registerForm.get(controlName);
 		return this.registerForm.controls[controlName];
 	}
 
-	// TODO move to util (insta/util/..)
 	// Gets the control error in a typesafe way
 	hasControlError(controlName: keyof RegisterFormData): boolean {
 		// return !this.registerForm.get(controlName)?.valid ?? false;
@@ -140,7 +159,6 @@ export class RegisterComponent {
 		return this.getControlByName(controlName).invalid;
 	}
 
-	// TODO move to util (insta/util/..)
 	// Gets the control error message in a typesafe way
 	getControlErrorMessage(controlName: keyof RegisterFormData): string {
 		// Get the control, e.g. password control
@@ -157,7 +175,7 @@ export class RegisterComponent {
 
 	// Called when the register button is clicked
 	onRegister() {
-		// console.log('form object', this.registerForm);
-		console.log('form value', this.registerForm.value);
+		console.log('form object', this.registerForm);
+		// console.log('form value', this.registerForm.value);
 	}
 }

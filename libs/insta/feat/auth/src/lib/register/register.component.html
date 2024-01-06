@@ -45,9 +45,13 @@
 					</mat-form-field>
 				</div>
 
+				<!-- STRENGTH BAR  -->
+				<ui-password-strength-bar [password]="getControlByName('password').value">
+				</ui-password-strength-bar>
+
 				<!--  REGISTER BUTTON -->
 				<div>
-					<button [disabled]="!registerForm.valid" type="submit" mat-raised-button color="primary">
+					<button [disabled]="registerForm.invalid" type="submit" mat-raised-button color="primary">
 						Register
 					</button>
 				</div>

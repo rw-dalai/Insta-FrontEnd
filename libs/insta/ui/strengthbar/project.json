@@ -1,7 +1,7 @@
 {
-	"name": "insta-feat-auth",
+	"name": "insta-ui-strengthbar",
 	"$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-	"sourceRoot": "libs/insta/feat/auth/src",
+	"sourceRoot": "libs/insta/ui/strengthbar/src",
 	"prefix": "insta",
 	"tags": [],
 	"projectType": "library",
@@ -10,7 +10,10 @@
 			"executor": "@nx/linter:eslint",
 			"outputs": ["{options.outputFile}"],
 			"options": {
-				"lintFilePatterns": ["libs/insta/feat/auth/**/*.ts", "libs/insta/feat/auth/**/*.html"]
+				"lintFilePatterns": [
+					"libs/insta/ui/strengthbar/**/*.ts",
+					"libs/insta/ui/strengthbar/**/*.html"
+				]
 			}
 		}
 	}

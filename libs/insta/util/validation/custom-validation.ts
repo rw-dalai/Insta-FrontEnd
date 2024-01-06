@@ -1,11 +1,15 @@
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+// The import { ... } syntax is used for importing named exports
 import { ZXCVBNFeedback, ZXCVBNResult, ZXCVBNScore } from 'zxcvbn';
+//  The import * as syntax is used for importing the default export
 import * as zxcvbn from 'zxcvbn';
 
+// Technically this is a class, but it is used as a namespace for the static methods.
 export class CustomValidators {
 	/**
 	 * ONLY EXAMPLE: A Configured Validator
-	 * Validator for checking if the value is at least the given length
+	 * For checking if the value is at least the given length
 	 * @param length The minimum length
 	 */
 	static min(length: number): ValidatorFn {
@@ -32,8 +36,6 @@ export class CustomValidators {
 			const score: ZXCVBNScore = result.score;
 			const feedback: ZXCVBNFeedback = result.feedback;
 
-			console.log('passwordStrength', score);
-
 			// If the password is not good enough return an error object
 			if (score < minScore) {
 				return {
@@ -51,14 +53,14 @@ export class CustomValidators {
 	}
 
 	/**
-	 * Validator for checking if the two fields match
+	 * Single Field Validator for checking if the two fields match
 	 * @param matchTo The name of the other field
 	 *
-	 * We are trying to solve the problem that if the other control value changes
-	 * my own validator should be called again.
+	 * Problem:
+	 * If this or the other control value changes this validator should.
 	 *
-	 * The solution involves a `Subscription` to the other control value
-	 * and listen for changes.
+	 * Solution:
+	 * Involves a `Subscription` to the other control value and listen to its changes.
 	 */
 	static match(matchTo: string): ValidatorFn {
 		let thisControl: AbstractControl;
@@ -69,11 +71,13 @@ export class CustomValidators {
 			if (!control.parent) return null;
 
 			// 2. In the second call there is a parent control
+			// This is purely for setting up the `Subscription` to the other control.
 			if (!thisControl) {
 				thisControl = control;
 				otherControl = control.parent?.get(matchTo) as AbstractControl;
 
-				// 2a. Set up subscription to update validity of this control when the other control changes
+				// 2a. Set up `Subscription` to update validity of this control when the other control changes
+				// In other words, call this validator, whenever one of the control value changes.
 				otherControl.valueChanges.subscribe(() => {
 					// If the other control changes call my own validator _AGAIN_
 					thisControl.updateValueAndValidity({
@@ -83,20 +87,21 @@ export class CustomValidators {
 				});
 			}
 
-			// 3. From now on the validity is updated when ANY 2 control changes
+			// 3. Verify if the both control values match
+			// If not return an error object.
 			if (thisControl.value !== otherControl.value) {
 				return {
 					mismatch: true,
 				};
 			}
 
-			// 4. If the values are equal return null
+			// 4. If the values are equal return null.
 			return null;
 		};
 	}
 
 	/**
-	 * Group Validator for checking if the two passwords match
+	 * Group Validator for checking if the two fields match
 	 * @param controlName1 The first control
 	 * @param controlName2 The second control
 	 */
@@ -121,6 +126,8 @@ export class CustomValidators {
 
 // Functional Programming
 // --------------------------------------------------------------------------------------------
+// As opposed to Object Oriented Programming (OOP).
+
 // Functions are First Class Citizens:
 // - Functions can be passed around like variables
 // - Functions can be stored in variables
@@ -130,7 +137,11 @@ export class CustomValidators {
 // - Function can return Functions
 
 // Closure:
-// - Functions can access variables from the outer scope
+// - A closure is a function having access to the parent scope,
+// even after the parent function has finished executing.
+
+// Scope:
+// - A scope is a set of variables, objects, and functions you have access to.
 
 // Examples
 // --------------------------------------------------------------------------------------------
