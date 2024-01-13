@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 // Always import by alias paths
 // See `tsconfig.base.json` for the alias paths
-import { RegisterComponent } from '@insta/feat/auth';
+import { RegisterContainerComponent } from '@insta/feat/auth';
 
 // Never ever import by relative paths
 // import { RegisterComponent } from '../../../../libs/insta/feat/auth/src';
@@ -14,7 +15,14 @@ import { RegisterComponent } from '@insta/feat/auth';
 // All of our components, directives, pipes, and services must be declared in a module
 @NgModule({
 	declarations: [AppComponent],
-	imports: [BrowserModule, BrowserAnimationsModule, RegisterComponent],
+	imports: [
+		// Needed for HttpClient
+		HttpClientModule,
+
+		BrowserModule,
+		BrowserAnimationsModule,
+		RegisterContainerComponent,
+	],
 	providers: [],
 	bootstrap: [AppComponent],
 })

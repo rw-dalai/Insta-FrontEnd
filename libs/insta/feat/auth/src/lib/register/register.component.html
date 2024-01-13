@@ -3,6 +3,28 @@
 		<mat-card-title>Register</mat-card-title>
 		<mat-card-content>
 			<form (ngSubmit)="onRegister()" [formGroup]="registerForm">
+				<!--  FIRSTNAME    -->
+				<div>
+					<mat-form-field>
+						<mat-label>Enter your first name</mat-label>
+						<input matInput formControlName="firstName" required />
+						<mat-error *ngIf="hasControlError('firstName')">
+							{{ getControlErrorMessage('firstName') }}
+						</mat-error>
+					</mat-form-field>
+				</div>
+
+				<!--  LASTNAME    -->
+				<div>
+					<mat-form-field>
+						<mat-label>Enter your last name</mat-label>
+						<input matInput formControlName="lastName" required />
+						<mat-error *ngIf="hasControlError('lastName')">
+							{{ getControlErrorMessage('lastName') }}
+						</mat-error>
+					</mat-form-field>
+				</div>
+
 				<!--  EMAIL    -->
 				<div>
 					<mat-form-field>
