@@ -2,7 +2,9 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RegisterComponent } from './register.component';
 import { RegisterFormData } from '../model/register-view.model';
-import { UserHttpService } from '@insta/data/user';
+
+import { AuthService } from '../../../../../data/auth/src';
+// import { UserHttpService } from '@insta/data/user';
 
 // Smart Container which connects to a Service or Store.
 // -> See also register.component.ts
@@ -14,13 +16,14 @@ import { UserHttpService } from '@insta/data/user';
 	styles: [],
 })
 export class RegisterContainerComponent {
-	userService = inject(UserHttpService);
+	// userService = inject(UserHttpService);
+	authService = inject(AuthService);
 
 	onRegister(formData: RegisterFormData) {
 		const { passwordConfirm, ...command } = formData;
 
 		// const registrationCommand = command as UserRegistrationCommand;
 
-		this.userService.register(command);
+		this.authService.register(command);
 	}
 }

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserRegistrationCommand } from '../actions/user.actions';
 import { inject, Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
@@ -24,4 +24,11 @@ export class UserHttpService {
 		// `firstValueFrom` turns an `Observable` into a `Promise`
 		return firstValueFrom(this.http.post<User>('/api/registration', command));
 	}
+
+	login(headers: HttpHeaders): Promise<User> {
+		return firstValueFrom(this.http.get<User>('/api/user', { headers }));
+	}
+
+	// TODO more user http stuff
+	// updateProfile
 }
