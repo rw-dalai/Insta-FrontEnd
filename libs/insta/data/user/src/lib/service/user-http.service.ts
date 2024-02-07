@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserRegistrationCommand } from '../actions/user.actions';
 import { inject, Injectable } from '@angular/core';
-import { lastValueFrom, Observable } from 'rxjs';
+import { lastValueFrom, retry, catchError, throwError, timeout, mergeMap } from 'rxjs';
 import { User } from '../model/user-domain.model';
 
 // A Http Service is responsible for sending data to the server.
@@ -9,14 +9,22 @@ import { User } from '../model/user-domain.model';
 // The FrontEnd sends `Commands` go to the Server e.g. `UserRegistrationCommand`
 // The Server responses with `Views`. e.g. `UserView`.
 
-// Right now for testing purposes we respond with the Backend Domain model `User`.
-
 // Programming Paradigms
-// Object Oriented Programming (OOP)
+// Object-Oriented Programming (OOP)
 // Functional Programming (FP)
 // Reactive Programming (RP)
 
+// Object-Oriented Programming
+// Solves the problem of handling data and behavior
+
+// Functional Programming
+// Solves the problem of handling data transformations
+
+// Reactive Programming
+// Solves the problem of handling asynchronous data streams
+
 // Observable
+// https://www.learnrxjs.io/
 // not native to the Browser (library is need e.g. RxJs)
 // 0..n data in the over time, n can be INFINITY (never completes)
 // set up an execution pipeline with powerful operators
@@ -24,6 +32,7 @@ import { User } from '../model/user-domain.model';
 // it is only executed when you `subscribe`
 
 // Promise
+// https://developer.mozilla.org/en-US/plus
 // native to Browser
 // 0..1 data over time
 // fulfilled / rejected
@@ -32,67 +41,74 @@ import { User } from '../model/user-domain.model';
 
 @Injectable({ providedIn: 'root' })
 export class UserHttpService {
+	// injection preferred over constructor injection
 	private http = inject(HttpClient);
 
 	// constructor(private http: HttpClient) {
 	// }
 
-	// TODO Server should response with `void`. `User` is just for Testing.
 	register(command: UserRegistrationCommand): Promise<User> {
 		// `firstValueFrom` turns an `Observable` into a `Promise`
 		return lastValueFrom(this.http.post<User>(`/api/registration`, command));
 	}
 
 	login(headers: HttpHeaders): Promise<User> {
+		// `firstValueFrom` turns an `Observable` into a `Promise`
 		return lastValueFrom(this.http.get<User>('/api/user/login', { headers }));
 	}
+
+	// RxJs Demonstrations:
+
+	// CATCH ERROR DEMO ---------------------------------------------------------
+	// - Catches an error and replaces it with a new Observable
+	// - If the source observable errors out, it's in an error state and will not emit anymore values
+	catchErrorDemo(command: UserRegistrationCommand): Promise<User> {
+		// this.http.post<User>('/api/request', command) -> Observable<User>
+		// It's called the `Source Observable`
+		return lastValueFrom(
+			this.http.post<User>('/api/request', command).pipe(
+				// - Replace with a new Error Observable:
+				catchError((err) => throwError(() => new Error('blabla failed for reason: ' + err)))
+				// - Replace with a new Value Observable:
+				// catchError((err) =>  of(...))
+			)
+		);
+	}
+
+	/*
+  // RETRY DEMO ---------------------------------------------------------------
+  // - Retry tries to re-execute the source-observable if it errors out
+  retryDemo(command: UserRegistrationCommand): Promise<User> {
+    return lastValueFrom(this.http.post<User>('/api/request', command)
+      .pipe(
+        // Retry 3 times
+        retry(3),
+        // After the 3rd error, the source-observable will be in an error state
+        catchError((err) =>  throwError(() => new Error('blabla failed for reason: ' + err)))
+      ));
+  }
+
+  // Timeout DEMO -------------------------------------------------------------
+  // - Throws an error if the source-observable does not emit a value within a specified duration
+  timeoutDemo(command: UserRegistrationCommand): Promise<User> {
+    return lastValueFrom(this.http.post<User>('/api/request', command)
+      .pipe(
+        timeout(5000),
+        // After the timeout, the source-observable will be in an error state
+        catchError((err) =>  throwError(() => new Error('registration timedout: ' + err)))
+      ));
+  }
+
+  // MergeMap DEMO ------------------------------------------------------------
+  // - Projects the source-observable value to a new Observable
+  mergeMapDemo(command: UserRegistrationCommand): Promise<User> {
+    // 1. First Observable (called the `Source Observable`)
+    return lastValueFrom(this.http.post<User>('/api/request1', command)
+      .pipe(
+        // 2. Projects the source-observable value to a new Observable (called `Inner Observable`)
+        mergeMap((dataRequest1) => this.http.post<User>('/api/request2', dataRequest1)),
+      ));
+  }
+
+   */
 }
-
-/*
-RETRY DEMO ---------
-return lastValueFrom(this.http.post<User>('/api/registration', command)
-  .pipe(
-    // Automatically re-subscribes to the source-observable
-    // up to n times (e.g. 3 times) in case of errors
-    retry(3)
-  ));
-
- */
-
-/*
-CATCH ERROR ---------
-return lastValueFrom(this.http.post<User>('/api/registration', command)
-.pipe(
- // Catches errors on the source-observable and returns a new observable.
- // CAUTION: Once an observable is in an error state, its DEAD !
- // - Returns an error:
- catchError((err) =>  throwError(() => new Error('registration failed for reason: ' + err)))
- // - Returns a fallback value:
- catchError((err) =>  of(..))
-));
-*/
-
-/*
-TIMEOUT ---------
-return lastValueFrom(this.http.post<User>('/api/registration', command)
-  .pipe(
-    // Throws and error if the source-observable does not emit a value
-    // within a specified duration (e.g. 5 seconds)
-    timeout(5000),
-    catchError((err) =>  throwError(() => new Error('registration timedout: ' + err)))
-  ));
-
- */
-
-/*
-  // MERGE MAP --------
-  // mergeMap, concatMap, switchMap, exhaustMap
-
-  // 1. First Observable (called the `Source Observable`)
-  return lastValueFrom(this.http.post<User>('/api/request1', command)
-    .pipe(
-      // Projects the source-observable value to a new Observable
-      // 2. Observable (called `Inner Observable`)
-      mergeMap((dataRequest1) => this.http.post<User>('/api/request2', dataRequest1)),
-    ));
-    */
