@@ -16,20 +16,17 @@
 // -> Remove Basic Auth Header
 
 import { inject, Injectable } from '@angular/core';
-import {
-	User,
-	UserHttpService,
-	UserLoginCommand,
-	UserRegistrationCommand,
-} from '../../../../user/src';
 import { HttpHeaders, HttpRequest } from '@angular/common/http';
 import { AuthToken } from '../model/auth.model';
 import { appendAuthHeader, generateAuthToken } from '../utils/auth.util';
+import { UserHttpService, UserRegistrationCommand, UserLoginCommand, User } from '@insta/data/user';
 
 // import { UserRegistrationCommand, UserHttpService } from '@insta/data/user';
 
+// Basic Auth
 @Injectable({ providedIn: 'root' })
-export class AuthService {
+export class BasicAuthService {
+	// Should be only set if the credentials are valid if invalid keep null
 	#authToken: AuthToken | null = null;
 
 	private userHttpService = inject(UserHttpService);
@@ -39,14 +36,14 @@ export class AuthService {
 	// }
 
 	register(command: UserRegistrationCommand): Promise<User> {
-		console.log('AuthService#register', command);
+		console.log('BasicAuthService#register', command);
 
 		return this.userHttpService.register(command);
 	}
 
 	// username, password
 	login(command: UserLoginCommand) {
-		console.log('AuthService#login', command);
+		console.log('BasicAuthService#login', command);
 
 		// 'Basic cmVuZUBnbXguYXQ6MTIzNDU2'
 		const authToken = generateAuthToken(command.email, command.password);
@@ -55,10 +52,13 @@ export class AuthService {
 		const headers = appendAuthHeader(new HttpHeaders(), authToken);
 
 		return this.userHttpService.login(headers).then(() => (this.#authToken = authToken));
-		// .catch()
+		// .catch((error) => this.#authToken = null)
 	}
 
-	logout() {}
+	logout() {
+		// TODO
+		this.#authToken = null;
+	}
 
 	appendAuthHeader(req: HttpRequest<any>): HttpRequest<any> {
 		if (this.#authToken == null) return req;

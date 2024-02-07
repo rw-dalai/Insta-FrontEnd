@@ -1,8 +1,8 @@
 export interface UserRegistrationCommand {
-	firstName: string;
-	lastName: string;
 	email: string;
 	password: string;
+	firstName: string;
+	lastName: string;
 }
 
 export interface UserLoginCommand {
