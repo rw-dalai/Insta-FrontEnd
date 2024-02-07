@@ -60,16 +60,22 @@ export class ErrorInterceptor implements HttpInterceptor {
 // 429 Too Many Requests
 // (500 Internal Server Error !?)
 // 502 Bad Gateway
+// 503 Service Unavailable
 // 504 Gateway Timeout
 // If no request was sent at all (no internet connection)
 
 enum HttpStatusCodes {
 	BadGateway = 502,
+	ServiceUnavailable = 503,
 	GatewayTimeout = 504,
 	// etc.
 }
 
-const retryCodes = [HttpStatusCodes.BadGateway, HttpStatusCodes.GatewayTimeout];
+const retryCodes = [
+	HttpStatusCodes.BadGateway,
+	HttpStatusCodes.ServiceUnavailable,
+	HttpStatusCodes.GatewayTimeout,
+];
 
 // Here we can define under which circumstances we want to retry.
 // e.g. Only GET requests, or specific status codes.
