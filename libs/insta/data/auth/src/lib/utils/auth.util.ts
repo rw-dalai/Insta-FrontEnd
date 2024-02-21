@@ -3,14 +3,15 @@
 import { HttpHeaders } from '@angular/common/http';
 import { AUTH_HEADER, AuthToken } from '../model/auth.model';
 
-export function generateAuthToken(username: string, password: string): AuthToken {
-	// return `Basic ${btoa(username + ':' + password)}`;
-	// Buffer.from(`Basic ${btoa(username + ':' + password)}`).toString('base64);
+// We need to send the Authorization header with the request
+// "Authorization: <type> <credentials>"
+// const headers = new HttpHeaders({
+//   'Authorization': 'Basic ' + btoa(command.email + ':' + command.password)
+// });
 
-	const credentials = `${username}:${password}`;
-	const credentials64 = btoa(credentials);
-	const type = 'Basic';
-	return `${type} ${credentials64}`;
+export function generateAuthToken(username: string, password: string): AuthToken {
+	return `Basic ${btoa(username + ':' + password)}`;
+	// return 'Basic ' + btoa(username + ':' + password);
 }
 
 export function appendAuthHeader(headers: HttpHeaders, authToken: AuthToken): HttpHeaders {

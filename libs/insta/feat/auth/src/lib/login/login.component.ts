@@ -10,6 +10,7 @@ import { CustomValidators } from '@insta/util';
 import { PasswordStrengthBarComponent } from '@insta/ui/strengthbar';
 import { RegisterFormData, RegisterFormErrorType } from '../model/register-view.model';
 import { LoginFormData, LoginFormErrorType, LoginFormType } from '../model/login-view.model';
+import { RouterLink } from '@angular/router';
 
 @Component({
 	selector: 'insta-register',
@@ -23,6 +24,7 @@ import { LoginFormData, LoginFormErrorType, LoginFormType } from '../model/login
 		MatButtonModule,
 		MatIconModule,
 		PasswordStrengthBarComponent,
+		RouterLink,
 	],
 	templateUrl: './login.component.html',
 	styleUrls: ['./login.component.css'],

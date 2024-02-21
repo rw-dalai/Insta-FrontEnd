@@ -20,6 +20,8 @@ export class LoginContainerComponent {
 	onLogin(formData: LoginFormData) {
 		const command: UserLoginCommand = formData;
 
-		this.authService.login(command);
+		this.authService.login(command).catch((error) => {
+			console.error('Login failed:', error);
+		});
 	}
 }

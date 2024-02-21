@@ -31,33 +31,31 @@ export class BasicAuthService {
 
 	private userHttpService = inject(UserHttpService);
 
-	// private  userHttpService: UserHttpService;
-	// constructor(private userHttpService: UserHttpService) {
-	// }
-
 	register(command: UserRegistrationCommand): Promise<User> {
 		console.log('BasicAuthService#register', command);
 
 		return this.userHttpService.register(command);
 	}
 
-	// username, password
-	login(command: UserLoginCommand) {
+	async login(command: UserLoginCommand): Promise<User> {
 		console.log('BasicAuthService#login', command);
 
-		// 'Basic cmVuZUBnbXguYXQ6MTIzNDU2'
-		const authToken = generateAuthToken(command.email, command.password);
+		// 1. Generate Auth Token
+		this.#authToken = generateAuthToken(command.email, command.password);
 
-		// Authorization: <type> <credentials>
-		const headers = appendAuthHeader(new HttpHeaders(), authToken);
-
-		return this.userHttpService.login(headers).then(() => (this.#authToken = authToken));
-		// .catch((error) => this.#authToken = null)
+		// 2. Auth Header will be appended by the interceptor on the http login request
+		try {
+			return await this.userHttpService.login();
+		} catch (error) {
+			// 3. On Failure, null Auth Token
+			this.#authToken = null;
+			throw error;
+		}
 	}
 
 	logout() {
-		// TODO
 		this.#authToken = null;
+		document.location.reload();
 	}
 
 	appendAuthHeader(req: HttpRequest<any>): HttpRequest<any> {
