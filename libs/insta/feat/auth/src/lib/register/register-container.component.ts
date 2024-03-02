@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RegisterComponent } from './register.component';
 import { RegisterFormData } from '../model/register-view.model';
 import { BasicAuthService } from '@insta/data/auth';
+import { Router } from '@angular/router';
 
 // Smart Container which connects to a Service or Store.
 // -> See also login.component.ts
@@ -15,12 +16,23 @@ import { BasicAuthService } from '@insta/data/auth';
 })
 export class RegisterContainerComponent {
 	authService = inject(BasicAuthService);
+	router = inject(Router);
 
 	onRegister(formData: RegisterFormData) {
 		const { passwordConfirm, ...command } = formData;
 
 		// const registrationCommand = command as UserRegistrationCommand;
 
-		this.authService.register(command);
+		this.authService
+			.register(command)
+			// success
+			.then(() => {
+				this.router.navigate(['/auth/login']);
+			})
+			// failure
+			.catch((error) => {
+				// Show Angular Material Snackbar
+				console.error('Register failed:', error);
+			});
 	}
 }

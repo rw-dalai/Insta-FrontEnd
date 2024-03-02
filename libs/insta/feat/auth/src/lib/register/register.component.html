@@ -1,4 +1,5 @@
 <div>
+	<a routerLink="../login"> Go to Login </a>
 	<mat-card>
 		<mat-card-title>Register</mat-card-title>
 		<mat-card-content>
@@ -42,6 +43,7 @@
 						<mat-label>Enter your password</mat-label>
 						<input matInput [type]="hide ? 'password' : 'text'" formControlName="password" />
 						<button
+							type="button"
 							mat-icon-button
 							matSuffix
 							(click)="hide = !hide"

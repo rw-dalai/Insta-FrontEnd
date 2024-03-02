@@ -34,7 +34,7 @@ import { appRoutes } from './app.routes';
 		RegisterContainerComponent,
 		LoginContainerComponent,
 
-		RouterModule.forRoot(appRoutes),
+		RouterModule.forRoot(appRoutes, { useHash: true }),
 	],
 	providers: [
 		{
@@ -51,13 +51,14 @@ import { appRoutes } from './app.routes';
 	bootstrap: [AppComponent],
 })
 export class AppModule {
-	router = inject(Router);
-	route = inject(ActivatedRoute);
+	// router = inject(Router);
+	// route = inject(ActivatedRoute);
 
 	// Routing
 
 	constructor() {
 		// Subscribe to router events
+		/*
 		this.router.events.subscribe((event) => {
 			if (event instanceof NavigationStart) {
 				console.log('NavigationStart event:', event);
@@ -79,24 +80,21 @@ export class AppModule {
 				console.log('ChildActivationEnd event:', event);
 			}
 		});
-
+     */
 		// 1. ------ NavigateByUrl ------
-		// NavigateByUrl takes a single string argument that represents the absolute path to navigate to.
+		// Absolute Path Route as a string
 		// this.router.navigateByUrl('/products/123');
-
 		// 2. ------ Navigate ------
-		// Absolute Path
+		// Absolute Path Route as an array of url segments
 		// Navigates to '/products'
 		// const productId = 123;
 		// this.router.navigate(['/products', productId]);
-
 		// 3. ------ Navigate ------
-		// Relative Sibling
+		// To Relative Sibling Route as an array of url segments
 		// Navigate to a sibling route
 		// this.router.navigate(['../sibling'], { relativeTo: this.route });
-
 		// 4. ------ Navigate ------
-		// to a Child
+		// To Child Route as an array of url segments
 		// this.router.navigate(['./child'], { relativeTo: this.route });
 	}
 }

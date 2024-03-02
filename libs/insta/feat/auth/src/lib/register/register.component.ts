@@ -83,6 +83,7 @@ import {
 	RegisterFormErrorType,
 	RegisterFormType,
 } from '../model/register-view.model';
+import { RouterLink } from '@angular/router';
 
 // Dump/Presentational Container which shows stuff on the screen to the user.
 // -> See also register-container.component.ts
@@ -98,6 +99,7 @@ import {
 		MatButtonModule,
 		MatIconModule,
 		PasswordStrengthBarComponent,
+		RouterLink,
 	],
 	templateUrl: './register.component.html',
 	styleUrls: ['./register.component.css'],
@@ -138,11 +140,11 @@ export class RegisterComponent {
 	// Type Safe Forms from Angular v14 ---------------------
 	// registerForm = inject(FormBuilder).nonNullable.group({
 	registerForm: FormGroup<RegisterFormType> = inject(FormBuilder).nonNullable.group({
-		email: ['rene@spengergasse.at', [Validators.required, Validators.email]],
-		password: ['spengergasse', [Validators.required, CustomValidators.passwordStrength(3)]],
-		passwordConfirm: ['spengergasse', [Validators.required, CustomValidators.match('password')]],
-		firstName: ['rene', [Validators.required, Validators.minLength(1)]],
-		lastName: ['wenz', [Validators.required, Validators.minLength(1)]],
+		email: ['', [Validators.required, Validators.email]],
+		password: ['', [Validators.required, CustomValidators.passwordStrength(3)]],
+		passwordConfirm: ['', [Validators.required, CustomValidators.match('password')]],
+		firstName: ['', [Validators.required, Validators.minLength(1)]],
+		lastName: ['', [Validators.required, Validators.minLength(1)]],
 	});
 
 	// Gets the control by name in a typesafe way

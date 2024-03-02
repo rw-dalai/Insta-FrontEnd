@@ -4,19 +4,19 @@ import { BasicAuthService } from './basic-auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
+	private service = inject(BasicAuthService);
+	private router = inject(Router);
 
-  private service = inject(BasicAuthService)
-  private router = inject(Router);
+	canActivate(): boolean | UrlTree {
+		// If user is authenticated then route to main shell
+		if (this.service.isAuthenticated) {
+			return true;
+		}
 
-  canActivate(): boolean | UrlTree  {
-    if (this.service.isAuthenticated) {
-      return true;
-    }
-
-    return this.router.parseUrl('/auth/login');
-  }
+		// Otherwise route to login
+		return this.router.parseUrl('/auth/login');
+	}
 }
-
 
 // export function authenticationGuard(): CanActivateFn {
 //   return (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
