@@ -30,7 +30,7 @@ export class LoginContainerComponent {
 			})
 			// failure
 			.catch((error) => {
-				// Angular Material Snackbar
+				// TODO Show Angular Material Snackbar
 				console.error('Login failed:', error);
 			});
 	}

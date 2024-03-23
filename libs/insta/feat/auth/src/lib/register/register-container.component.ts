@@ -31,7 +31,7 @@ export class RegisterContainerComponent {
 			})
 			// failure
 			.catch((error) => {
-				// Show Angular Material Snackbar
+				// TODO Show Angular Material Snackbar
 				console.error('Register failed:', error);
 			});
 	}
