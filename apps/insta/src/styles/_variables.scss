@@ -1,0 +1,29 @@
+// Define global configurable variables e.g. width/height of toolbar, sidebar
+
+@import 'colors';
+
+// --- Global Colors ---
+$app-content-bkd-color: $app-color;
+
+// --- Sidebar  ---
+$sidebar-width: 80px;
+$sidebar-width--expanded: 200px;
+
+$sidebar-menu-bkd-color: #16253b;
+$sidebar-menu-color: #e0e0e0;
+
+$sidebar-menu-bkg-color--active: #3cc9f5;
+$sidebar-menu-color--active: $sidebar-menu-bkd-color;
+
+$sidebar-menu-item-size: 50px;
+$sidebar-menu-item-space: 1rem;
+
+// --- Toolbar ---
+$toolbar-height: 80px;
+$toolbar-bkd-color: white;
+
+// --- Searchbar ---
+$searchbar-bkd-color: #efefef;
+$searchbar-bkd-color--focused: white;
+$searchbar-border-radius: 50px;
+$searchbar-outline-color: #e0e0e0;

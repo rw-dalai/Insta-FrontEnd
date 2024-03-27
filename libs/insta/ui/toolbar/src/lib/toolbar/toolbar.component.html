@@ -1,0 +1,64 @@
+<mat-toolbar class="toolbar">
+	<div class="toolbar__content">
+		<!-- Angular Material Icons -->
+		<!-- https://fonts.google.com/icons -->
+
+		<!— Burger Menu Button -->
+		<button class="toolbar__menu" *ngIf="!isExpanded" mat-icon-button (click)="onToggle()">
+			<mat-icon>menu</mat-icon>
+		</button>
+
+		<!--  LEFT PART -->
+		<div class="toolbar__content--left">
+			<!-- Search Bar -->
+			<ui-searchbar
+				class="toolbar__search"
+				*ngIf="isExpanded"
+				[type]="SearchbarType.Raised"
+				[searchControl]="searchCtrl"
+				(searchClick)="this.onSearchClick()"
+			>
+				>
+			</ui-searchbar>
+		</div>
+
+		<!-- RIGHT PART  -->
+		<div class="toolbar__content--right">
+			<!-- Search Icon -->
+			<button mat-icon-button matTooltip="Search" *ngIf="!isExpanded">
+				<mat-icon>search</mat-icon>
+			</button>
+
+			<!-- Message Icon -->
+			<button mat-icon-button matTooltip="Messages">
+				<mat-icon class="material-icons-outlined">chat_bubble_outlined</mat-icon>
+			</button>
+
+			<!-- Notification Icon -->
+			<button mat-icon-button matTooltip="Notifications">
+				<mat-icon class="material-icons-outlined">notifications</mat-icon>
+			</button>
+
+			<!-- 3 Dots Menu -->
+			<button mat-icon-button [matMenuTriggerFor]="menu" matTooltip="User">
+				<mat-icon>more_vert</mat-icon>
+			</button>
+			<mat-menu #menu="matMenu">
+				<button mat-menu-item>
+					<mat-icon class="material-icons-outlined">settings</mat-icon>
+					<span>Settings</span>
+				</button>
+
+				<button mat-menu-item>
+					<mat-icon class="material-icons-outlined">logout</mat-icon>
+					<span>Logout Account</span>
+				</button>
+			</mat-menu>
+
+			<!-- Avatar -->
+			<div class="toolbar__avatar">
+				<img class="toolbar_avatar" src="assets/avatar.png" />
+			</div>
+		</div>
+	</div>
+</mat-toolbar>

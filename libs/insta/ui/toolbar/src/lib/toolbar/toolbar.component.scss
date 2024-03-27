@@ -1,0 +1,71 @@
+@import 'apps/insta/src/styles/index';
+
+:host {
+	// Set full width and fixed height
+	width: 100%;
+	height: $toolbar-height;
+
+	// Fix it to the top of the page
+	position: sticky;
+	top: 0;
+
+	// Host component set to block (otherwise it will be inline)
+	display: block;
+
+	z-index: 100;
+}
+
+.toolbar {
+	height: 100%;
+
+	display: block;
+	padding: 8px;
+}
+
+.toolbar__content {
+	// Content height should be 100% of the toolbar
+	height: 100%;
+
+	// Content child layout
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+
+	// Content background and shadow
+	background-color: $toolbar-bkd-color;
+	border-radius: 0.625rem;
+	box-shadow: 0 0 10px 0 rgba(34, 41, 47, 0.1);
+
+	// Content should not overflow
+	overflow: hidden;
+}
+
+.toolbar__content--left {
+	display: inline-flex;
+
+	// Let the left part grow and shrink as needed
+	flex: 1 1 0;
+
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+
+.toolbar__content--right {
+	display: inline-flex;
+
+	padding-right: 1rem;
+}
+
+.toolbar__search {
+	width: 85%;
+}
+
+.toolbar__avatar {
+	width: 50px;
+	height: 50px;
+
+	display: inline-flex;
+
+	vertical-align: bottom;
+	border-radius: 50px;
+}

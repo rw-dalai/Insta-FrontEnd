@@ -18,7 +18,7 @@
 				"assets": ["apps/insta/src/favicon.ico", "apps/insta/src/assets"],
 				"styles": [
 					"@angular/material/prebuilt-themes/indigo-pink.css",
-					"apps/insta/src/styles.scss"
+					"apps/insta/src/styles/index.scss"
 				],
 				"scripts": []
 			},

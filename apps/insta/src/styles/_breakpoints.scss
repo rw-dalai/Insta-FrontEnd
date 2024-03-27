@@ -1,0 +1,32 @@
+// Mixins
+// https://sass-lang.com/documentation/at-rules/mixin/
+
+// Using Mixins with SCSS to Create Breakpoints
+// https://dev.to/oler/using-mixins-with-scss-to-create-breakpoints-8g6
+
+@mixin breakpoint($point) {
+	@if $point == mobile {
+		@media (max-width: 600px) {
+			@content;
+		}
+	}
+	@elseif $point == table {
+		@media (max-width: 900px) {
+			@content;
+		}
+	}
+	@elseif $point == desktop {
+		@media (max-width: 1200px) {
+			@content;
+		}
+	}
+}
+
+// Example Usage in the UI libs
+//.div-example {
+//  background-color: blue;
+//
+//  @include breakpoint(desktop) {
+//    background-color: red;
+//  }
+//}

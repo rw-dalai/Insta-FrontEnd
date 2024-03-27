@@ -1,0 +1,88 @@
+@import 'apps/insta/src/styles/index';
+
+// ::ng-deep
+
+// Allows you to style components that are not part of your component's template.
+// It is a way to "escape" the view encapsulation of Angular components.
+
+// But it is deprecated and will be removed (nobody knows when)
+// https://angular.io/guide/component-styles#deprecated-deep--and-ng-deep
+
+// https://sass-lang.com/documentation/at-rules/mixin
+// We use mixins to avoid repeating code
+@mixin searchbar-styles {
+	outline: 1px solid $searchbar-outline-color;
+	border-radius: $searchbar-border-radius;
+}
+
+// Searchbar Flat
+:host(.searchbar--flat) mat-form-field.mat-focused {
+	// Apply the mixin
+	@include searchbar-styles;
+}
+
+// Searchbar Raised
+:host(.searchbar--raised) mat-form-field.mat-focused {
+	// Apply the mixin
+	@include searchbar-styles;
+	box-shadow: 2px 2px 6px 1px rgba(34, 41, 47, 0.1);
+}
+
+// Host component set to block (otherwise it will be inline)
+:host {
+	display: block;
+}
+
+// Wrapping the mat-form-field styles to avoid polluting the global scope since we are using ::ng-deep
+.searchbar {
+	// Mat Form Field set to 100% width of the host
+	mat-form-field {
+		width: 100%;
+	}
+
+	// Hides the placeholder text when the input is focused
+	input:focus::placeholder {
+		color: transparent;
+	}
+
+	// Color when focused
+	::ng-deep mat-form-field.mat-focused .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+		background-color: $searchbar-bkd-color--focused;
+	}
+
+	// Remove default subscript wrapper
+	::ng-deep .mat-mdc-form-field-subscript-wrapper {
+		display: none;
+	}
+
+	// Remove default label
+	::ng-deep mat-form-field.mat-focused mat-label {
+		display: none;
+	}
+
+	// Set our own background color and border radius
+	::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+		background-color: $searchbar-bkd-color;
+		border-radius: $searchbar-border-radius;
+	}
+
+	// Set our own height
+	::ng-deep .mat-mdc-form-field-flex {
+		height: 50px;
+	}
+
+	// Remove default 280px width and make it fluid
+	::ng-deep .mat-mdc-form-field-infix {
+		width: initial !important;
+	}
+
+	// Remove default underline
+	::ng-deep .mdc-line-ripple {
+		display: none;
+	}
+
+	// Remove efault overlay
+	::ng-deep .mat-mdc-form-field-focus-overlay {
+		display: none;
+	}
+}

@@ -1,0 +1,18 @@
+<div class="searchbar">
+	<mat-form-field>
+		<button mat-icon-button matTooltip="Search" matPrefix>
+			<mat-icon>search</mat-icon>
+		</button>
+
+		<button
+			mat-icon-button
+			matTooltip="Advanced Search"
+			matSuffix
+			(click)="onAdvancedSearchClick()"
+		>
+			<mat-icon>tune</mat-icon>
+		</button>
+
+		<input matInput placeholder="Search" [formControl]="searchControl" type="search" />
+	</mat-form-field>
+</div>
