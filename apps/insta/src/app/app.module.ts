@@ -20,6 +20,9 @@ import {
 	RoutesRecognized,
 } from '@angular/router';
 import { appRoutes } from './app.routes';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 // A module is a container for components, directives, pipes, and services
 // All of our components, directives, pipes, and services must be declared in a module
@@ -34,7 +37,26 @@ import { appRoutes } from './app.routes';
 		RegisterContainerComponent,
 		LoginContainerComponent,
 
+		// Root Routing
 		RouterModule.forRoot(appRoutes, { useHash: true }),
+
+		// Root Data Store
+		StoreModule.forRoot(
+			{},
+			{
+				metaReducers: [],
+				runtimeChecks: {
+					strictActionImmutability: true,
+					strictStateImmutability: true,
+				},
+			}
+		),
+
+		// Root Effects
+		EffectsModule.forRoot([]),
+
+		// Root Routing -> Root Data Store
+		StoreRouterConnectingModule.forRoot(),
 	],
 	providers: [
 		{

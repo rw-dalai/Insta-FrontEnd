@@ -1,7 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { UserRegistrationCommand } from '../actions/user.actions';
 import { inject, Injectable } from '@angular/core';
-import { lastValueFrom, retry, catchError, throwError, timeout, mergeMap } from 'rxjs';
+import { catchError, lastValueFrom, throwError } from 'rxjs';
 import { User } from '../model/user-domain.model';
 
 // A Http Service is responsible for sending data to the server.
