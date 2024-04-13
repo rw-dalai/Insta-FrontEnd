@@ -19,7 +19,14 @@ import { inject, Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
 import { AuthToken } from '../model/auth.model';
 import { appendAuthHeader, generateAuthToken } from '../utils/auth.util';
-import { UserHttpService, UserRegistrationCommand, UserLoginCommand, User } from '@insta/data/user';
+import {
+	UserHttpService,
+	UserLoginCommand,
+	UserRegistrationCommand,
+	User,
+	UserLoginResponse,
+} from '@insta/data/user';
+import { catchError, Observable, switchMap, tap, throwError } from 'rxjs';
 
 // import { UserRegistrationCommand, UserHttpService } from '@insta/data/user';
 
@@ -41,20 +48,38 @@ export class BasicAuthService {
 		return this.userHttpService.register(command);
 	}
 
-	async login(command: UserLoginCommand): Promise<User> {
+	// async login(command: UserLoginCommand): Promise<User> {
+	// 	console.log('BasicAuthService#login', command);
+	//
+	// 	// 1. Generate Auth Token
+	// 	this.authToken = generateAuthToken(command.email, command.password);
+	//
+	// 	// 2. Auth Header will be appended by the interceptor on the http login request
+	// 	try {
+	// 		return await this.userHttpService.login();
+	// 	} catch (error) {
+	// 		// 3. On Failure, null Auth Token
+	// 		this.authToken = null;
+	// 		throw error;
+	// 	}
+	// }
+
+	login(command: UserLoginCommand): Observable<UserLoginResponse> {
 		console.log('BasicAuthService#login', command);
 
 		// 1. Generate Auth Token
 		this.authToken = generateAuthToken(command.email, command.password);
 
 		// 2. Auth Header will be appended by the interceptor on the http login request
-		try {
-			return await this.userHttpService.login();
-		} catch (error) {
-			// 3. On Failure, null Auth Token
-			this.authToken = null;
-			throw error;
-		}
+
+		// rxjs pipeline (tap, filter, map, catchError, switchMap, mergeMap, concatMap, exhaustMap)
+		return this.userHttpService.login().pipe(
+			tap((_) => console.log('basic auth service login')),
+			catchError((error) => {
+				this.authToken = null;
+				return throwError(() => new Error('Login failed ' + error));
+			})
+		);
 	}
 
 	logout() {

@@ -1,28 +1,17 @@
-import { inject, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BasicAuthInterceptor, ErrorInterceptor } from '@insta/data/auth';
 import { LoginContainerComponent, RegisterContainerComponent } from '@insta/feat/auth';
-import {
-	ActivatedRoute,
-	ChildActivationEnd,
-	ChildActivationStart,
-	NavigationCancel,
-	NavigationEnd,
-	NavigationError,
-	NavigationStart,
-	RouteConfigLoadEnd,
-	RouteConfigLoadStart,
-	Router,
-	RouterModule,
-	RoutesRecognized,
-} from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { UserDataModule } from '@insta/data/user';
 
 // A module is a container for components, directives, pipes, and services
 // All of our components, directives, pipes, and services must be declared in a module
@@ -36,6 +25,9 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 		BrowserAnimationsModule,
 		RegisterContainerComponent,
 		LoginContainerComponent,
+
+		// data modules have store, store needs to be ready when app starts
+		UserDataModule,
 
 		// Root Routing
 		RouterModule.forRoot(appRoutes, { useHash: true }),
@@ -51,6 +43,8 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 				},
 			}
 		),
+
+		StoreDevtoolsModule.instrument({ maxAge: 25 }),
 
 		// Root Effects
 		EffectsModule.forRoot([]),

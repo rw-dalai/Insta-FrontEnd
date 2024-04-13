@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { UserRegistrationCommand } from '../actions/user.actions';
 import { inject, Injectable } from '@angular/core';
-import { catchError, lastValueFrom, throwError } from 'rxjs';
-import { User } from '../model/user-domain.model';
+import { catchError, lastValueFrom, Observable, throwError } from 'rxjs';
+import { UserLoginResponse, UserRegistrationCommand } from '../+state/user.actions';
+import { User } from '../+state/user-domain.model';
 
 // A Http Service is responsible for sending data to the server.
 
@@ -53,11 +53,15 @@ export class UserHttpService {
 	}
 
 	// login(headers: HttpHeaders): Promise<User> {
-	login(): Promise<User> {
-		// `firstValueFrom` turns an `Observable` into a `Promise`
-		// return lastValueFrom(this.http.get<User>('/api/user', { headers }));
-		// return lastValueFrom(this.http.get<User>('/api/user'));
-		return lastValueFrom(this.http.get<User>('/api/user'));
+	// login(): Promise<User> {
+	// `firstValueFrom` turns an `Observable` into a `Promise`
+	// return lastValueFrom(this.http.get<User>('/api/user', { headers }));
+	// return lastValueFrom(this.http.get<User>('/api/user'));
+	// return lastValueFrom(this.http.get<User>('/api/user'));
+	// }
+
+	login(): Observable<UserLoginResponse> {
+		return this.http.get<UserLoginResponse>('/api/user');
 	}
 
 	// RxJs Demonstrations:

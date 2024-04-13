@@ -8,14 +8,13 @@ export class AuthGuard implements CanActivate {
 	private router = inject(Router);
 
 	canActivate(): boolean | UrlTree {
-		return true;
 		// If user is authenticated then route to main shell
-		// if (this.service.isAuthenticated) {
-		// 	return true;
-		// }
+		if (this.service.isAuthenticated) {
+			return true;
+		}
 
 		// Otherwise route to login
-		// return this.router.parseUrl('/auth/login');
+		return this.router.parseUrl('/auth/login');
 	}
 }
 

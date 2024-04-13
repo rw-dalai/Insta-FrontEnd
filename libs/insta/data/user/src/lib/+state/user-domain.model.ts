@@ -1,3 +1,11 @@
+// /**
+//  * Interface for the 'User' data
+//  */
+// export interface UserEntity {
+// 	id: string | number; // Primary ID
+// 	name: string;
+// }
+
 // This is the domain model for our data or store. It usually comes from the server.
 // The frontend domain model DOES NOT MATCH the backend domain model.
 
@@ -7,6 +15,7 @@
 
 // Model all our frontend data with interfaces
 export interface User {
+	id: string;
 	email: string;
 	role: Role;
 	profile: Profile;
