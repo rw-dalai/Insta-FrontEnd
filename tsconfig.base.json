@@ -16,6 +16,7 @@
 		"baseUrl": ".",
 		"paths": {
 			"@insta/data/auth": ["libs/insta/data/auth/src/index.ts"],
+			"@insta/data/post": ["libs/insta/data/post/src/index.ts"],
 			"@insta/data/user": ["libs/insta/data/user/src/index.ts"],
 			"@insta/feat/auth": ["libs/insta/feat/auth/src/index.ts"],
 			"@insta/feat/main": ["libs/insta/feat/main/src/index.ts"],

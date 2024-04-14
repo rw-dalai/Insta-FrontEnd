@@ -12,6 +12,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { UserDataModule } from '@insta/data/user';
+import { PostDataModule } from '@insta/data/post';
 
 // A module is a container for components, directives, pipes, and services
 // All of our components, directives, pipes, and services must be declared in a module
@@ -28,6 +29,7 @@ import { UserDataModule } from '@insta/data/user';
 
 		// data modules have store, store needs to be ready when app starts
 		UserDataModule,
+		PostDataModule,
 
 		// Root Routing
 		RouterModule.forRoot(appRoutes, { useHash: true }),

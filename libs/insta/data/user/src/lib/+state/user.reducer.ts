@@ -43,6 +43,8 @@ import * as UserActions from './user.actions';
 import { User } from './user-domain.model';
 import { UserLoginResponse } from './user.actions';
 
+// Simple key/value store
+
 export const USER_FEATURE_KEY = 'user';
 
 export interface UserState {

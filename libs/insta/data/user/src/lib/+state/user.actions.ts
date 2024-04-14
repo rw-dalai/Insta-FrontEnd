@@ -15,6 +15,7 @@
 
 import { createAction, props } from '@ngrx/store';
 import { User } from './user-domain.model';
+import { Post } from '@insta/data/post';
 
 export interface UserRegistrationCommand {
 	email: string;
@@ -32,7 +33,7 @@ export interface UserLoginCommand {
 
 export interface UserLoginResponse {
 	user: User;
-	// posts: Post[];
+	posts: Post[];
 }
 
 export const loginUser = createAction(
@@ -45,4 +46,7 @@ export const loginUserSuccess = createAction(
 	props<UserLoginResponse>()
 );
 
-export const loginUserFailure = createAction('[User/API] Login User', props<{ error: string }>());
+export const loginUserFailure = createAction(
+	'[User/API] Login User Failure',
+	props<{ error: string }>()
+);
