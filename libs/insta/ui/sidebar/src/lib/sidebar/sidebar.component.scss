@@ -1,0 +1,118 @@
+@import 'apps/insta/src/styles/index';
+
+// Sidebar Container (Everything)
+.sidebar__container {
+	height: 100%;
+}
+
+// Sidebar Content (including the toolbar)
+.sidebar__content {
+	background-color: $app-content-bkd-color;
+}
+
+// Sidebar Content (excluding the toolbar, only the routed content)
+.sidebar__outlet {
+	height: calc(100% - $toolbar-height);
+	padding: 1.5rem 1rem;
+}
+
+// Sidebar Menus
+.sidebar__menu {
+	width: $sidebar-width;
+	&--expanded {
+		width: $sidebar-width--expanded;
+	}
+	height: 100%;
+	padding: 1.5rem 1rem;
+
+	background-color: $sidebar-menu-bkd-color;
+	box-shadow: 0.065rem 0 1.25rem 0 grey;
+	color: $sidebar-menu-color;
+}
+
+// Sidebar Menu Item
+.menu-item {
+	// All menu items may expand therefore min-width
+	min-width: $sidebar-menu-item-size;
+	height: $sidebar-menu-item-size;
+	margin-bottom: $sidebar-menu-item-space;
+
+	display: block;
+	transition: all 0.3s ease;
+	cursor: pointer;
+
+	&__menu {
+		// The menu icon on top does not expand therefore fixed width
+		width: $sidebar-menu-item-size;
+	}
+
+	// What happens if the menu item is active
+	&--active &__icon,
+	&--active &__name {
+		background-color: $sidebar-menu-bkg-color--active;
+		* {
+			color: $sidebar-menu-color--active;
+		}
+	}
+
+	// What happens if the menu item is hovered
+	&--hoverable:hover &__icon,
+	&--hoverable:hover &__name {
+		background-color: $sidebar-menu-bkg-color--active;
+		* {
+			color: $sidebar-menu-color--active;
+		}
+	}
+
+	// The menu item content of the icon and the name
+	&__content {
+		display: flex;
+		align-items: center;
+	}
+
+	// The menu item icon
+	&__icon {
+		// Set a fixed width/height
+		width: $sidebar-menu-item-size;
+		height: $sidebar-menu-item-size;
+
+		// Center the icon
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		color: $app-content-bkd-color;
+		border-radius: 20px;
+
+		mat-icon {
+			font-size: 2rem;
+		}
+	}
+
+	// The menu item name
+	&__name {
+		// Set a fixed width/height
+		width: calc(100% - $sidebar-menu-item-size);
+		height: $sidebar-menu-item-size;
+
+		// Center the name vertically and align it to the left
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+
+		color: $app-content-bkd-color;
+		border-radius: 20px;
+
+		span {
+			margin-left: 2rem;
+		}
+	}
+}
+
+// --- Customize Mat Icons ---
+
+// We want to set our own width and height and not take the default value from material
+.mat-icon {
+	height: initial !important;
+	width: initial !important;
+}

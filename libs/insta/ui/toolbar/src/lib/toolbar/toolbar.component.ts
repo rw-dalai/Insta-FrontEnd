@@ -22,7 +22,7 @@ import { MatMenuModule } from '@angular/material/menu';
 		MatMenuModule,
 	],
 	templateUrl: './toolbar.component.html',
-	styleUrls: ['./toolbar.component.css'],
+	styleUrls: ['./toolbar.component.scss'],
 })
 export class ToolbarComponent implements OnInit {
 	// The searchbar type needed as an enum for property binding

@@ -1,0 +1,44 @@
+<mat-sidenav-container class="sidebar__container">
+	<!-- SIDENAV MENU -->
+	<mat-sidenav
+		class="sidebar__menu"
+		[ngClass]="{ 'sidebar__menu--expanded': isExpanded }"
+		#sidenav
+		mode="side"
+		opened="true"
+	>
+		<!-- 1. Burger Menu Item -->
+		<mat-list-item class="menu-item menu-item__menu">
+			<mat-icon class="menu-item__icon" (click)="onToggle()">menu</mat-icon>
+		</mat-list-item>
+
+		<!-- 2. Navigation Items -->
+		<mat-list-item
+			class="menu-item menu-item--hoverable"
+			routerLinkActive="menu-item--active"
+			*ngFor="let item of navigationItems"
+			[routerLink]="item.route"
+		>
+			<div class="menu-item__content">
+				<div class="menu-item__icon">
+					<mat-icon>{{ item.icon }}</mat-icon>
+				</div>
+				<div class="menu-item__name" *ngIf="isExpanded">
+					<span>{{ item.name }}</span>
+				</div>
+			</div>
+		</mat-list-item>
+	</mat-sidenav>
+
+	<!-- SIDENAV CONTENT  -->
+	<mat-sidenav-content class="sidebar__content">
+		<!-- Slot for content projection provided by the parent component e.g. toolbar -->
+		<ng-content></ng-content>
+
+		<!-- ROUTED CONTENT -->
+		<!-- Here we route all our features after logged in -->
+		<div class="sidebar__outlet">
+			<router-outlet></router-outlet>
+		</div>
+	</mat-sidenav-content>
+</mat-sidenav-container>

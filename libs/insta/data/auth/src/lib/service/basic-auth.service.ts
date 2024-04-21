@@ -65,7 +65,7 @@ export class BasicAuthService {
 	// }
 
 	login(command: UserLoginCommand): Observable<UserLoginResponse> {
-		console.log('BasicAuthService#login', command);
+		// console.log('BasicAuthService#login', command);
 
 		// 1. Generate Auth Token
 		this.authToken = generateAuthToken(command.email, command.password);
@@ -74,7 +74,7 @@ export class BasicAuthService {
 
 		// rxjs pipeline (tap, filter, map, catchError, switchMap, mergeMap, concatMap, exhaustMap)
 		return this.userHttpService.login().pipe(
-			tap((_) => console.log('basic auth service login')),
+			// tap((_) => console.log('basic auth service login')),
 			catchError((error) => {
 				this.authToken = null;
 				return throwError(() => new Error('Login failed ' + error));

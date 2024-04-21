@@ -29,7 +29,7 @@ export class ErrorInterceptor implements HttpInterceptor {
      */
 
 		return next.handle(req).pipe(
-			tap(() => console.error(`retry request ${req.url}`)),
+			// tap(() => console.error(`retry request ${req.url}`)),
 			retry({
 				// Maximum number of retry attempts
 				count: this.retryMaxAttempts,
@@ -37,12 +37,13 @@ export class ErrorInterceptor implements HttpInterceptor {
 				// If the Observable throws an Error: no retry
 				// If the Observable emits a value: then retry
 				delay: (error, retryCount) => {
-					if (shouldRetry(error))
+					if (shouldRetry(error)) {
+						console.error(`retry request ${req.url}`);
 						// Linear backoff
 						// return timer(this.retryDelay)
 						// Exponential backoff
 						return timer(this.retryDelay * Math.pow(2, retryCount - 1));
-					else return throwError(() => error);
+					} else return throwError(() => error);
 				},
 			}),
 			catchError((error) =>

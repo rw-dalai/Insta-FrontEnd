@@ -24,6 +24,7 @@
 			"@insta/feat/timeline": ["libs/insta/feat/timeline/src/index.ts"],
 			"@insta/ui/searchbar": ["libs/insta/ui/searchbar/src/index.ts"],
 			"@insta/ui/strengthbar": ["libs/insta/ui/strengthbar/src/index.ts"],
+			"@insta/ui/sidebar": ["libs/insta/ui/sidebar/src/index.ts"],
 			"@insta/ui/toolbar": ["libs/insta/ui/toolbar/src/index.ts"],
 			"@insta/util": ["libs/insta/util/index.ts"],
 			"@todo-demo/data": ["libs/todo-demo/data/src/index.ts"],
