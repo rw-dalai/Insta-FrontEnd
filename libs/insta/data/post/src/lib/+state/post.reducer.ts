@@ -1,11 +1,10 @@
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { createReducer, on, Action } from '@ngrx/store';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import { Action, createReducer, on } from '@ngrx/store';
 
 // import * as PostActions from './post.actions';
 import { Post } from './post-domain.model';
-import { Dictionary, EntityMap, EntityMapOne, Predicate, Update } from '@ngrx/entity/src/models';
-import * as UserActions from '../../../../user/src/lib/+state/user.actions';
-import { UserLoginResponse } from '../../../../user/src/lib/+state/user.actions';
+import * as UserActions from '@insta/data/user';
+import { UserLoginResponse } from '@insta/data/user';
 
 // Entity Store
 

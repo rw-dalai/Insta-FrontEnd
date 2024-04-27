@@ -9,6 +9,7 @@ import { UserEffects } from './+state/user.effects';
 	declarations: [],
 	imports: [
 		CommonModule,
+
 		StoreModule.forFeature(fromUser.USER_FEATURE_KEY, fromUser.userReducer),
 		EffectsModule.forFeature([UserEffects]),
 	],

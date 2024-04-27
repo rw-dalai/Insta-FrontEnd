@@ -9,6 +9,7 @@ import { PostFacade } from './+state/post.facade';
 @NgModule({
 	imports: [
 		CommonModule,
+
 		StoreModule.forFeature(fromPost.POST_FEATURE_KEY, fromPost.postReducer),
 		EffectsModule.forFeature([PostEffects]),
 	],

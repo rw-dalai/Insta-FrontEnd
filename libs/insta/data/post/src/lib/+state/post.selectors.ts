@@ -1,6 +1,17 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { POST_FEATURE_KEY, PostState, postAdapter } from './post.reducer';
 
+// PULL style API
+//   Rest APIs, HTTP GET Request
+//   Java Streams
+//   JavaScript array methods
+
+// PUSH style API
+//  Push Notification
+//  SSE
+//  WebSockets
+//  Redux Store -> Selectors
+
 // Lookup the 'Post' feature state managed by NgRx
 export const selectPostState = createFeatureSelector<PostState>(POST_FEATURE_KEY);
 

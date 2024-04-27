@@ -52,8 +52,8 @@ export class LoginComponent {
 	// Type Safe Forms from Angular v14 ---------------------
 	// registerForm = inject(FormBuilder).nonNullable.group({
 	loginForm: FormGroup<LoginFormType> = inject(FormBuilder).nonNullable.group({
-		email: ['', [Validators.required, Validators.email]],
-		password: ['', [Validators.required, CustomValidators.passwordStrength(3)]],
+		email: ['dorothy.strosin@yahoo.com', [Validators.required, Validators.email]],
+		password: ['spengergasse', [Validators.required, CustomValidators.passwordStrength(3)]],
 	});
 
 	// Gets the control by name in a typesafe way
