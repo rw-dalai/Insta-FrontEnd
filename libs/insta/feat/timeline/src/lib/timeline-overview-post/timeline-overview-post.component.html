@@ -1,0 +1,23 @@
+<mat-card class="example-card">
+	<mat-card-header>
+		<div mat-card-avatar class="example-header-image"></div>
+		<!--    <mat-card-title>{{ post.id }}</mat-card-title>-->
+		<!--    <mat-card-subtitle>Dog Breed</mat-card-subtitle>-->
+		<mat-chip-set>
+			@for (hashtag of post.hashTags; track hashtag.value) {
+			<mat-chip>{{ hashtag.value }}</mat-chip>
+			}
+		</mat-chip-set>
+	</mat-card-header>
+	<img mat-card-image [authImage]="'/api/media/' + post.thumb.id" alt="Photo of a Shiba Inu" />
+	<!--  <img mat-card-image [src]=icon>-->
+	<mat-card-content>
+		<p>
+			{{ post.text }}
+		</p>
+	</mat-card-content>
+	<mat-card-actions>
+		{{ post.likes }}
+		<mat-icon fontIcon="favorite"></mat-icon>
+	</mat-card-actions>
+</mat-card>

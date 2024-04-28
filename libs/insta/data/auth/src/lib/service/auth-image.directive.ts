@@ -30,6 +30,15 @@ import { HttpClient } from '@angular/common/http';
 // It is useful for images that are created dynamically in the browser.
 // Using one of those API's: Canvas, WebRTC, File API, etc.
 
+// const blob = new Blob([binaryData], {type: 'image/jpeg'});
+// const url = URL.createObjectURL(blob);
+// document.querySelector('img').src = url;
+
+// In our directive we fetch an image bytes from the server, get a Blob and create a Blob URL.
+// This is possible because the server sends:
+//  -Content-Type: image/jpeg
+//  - Response Body: binary data
+
 @Directive({
 	selector: '[authImage]',
 	standalone: true,

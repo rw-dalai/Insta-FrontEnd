@@ -22,12 +22,7 @@ import { TimelineListPostComponent } from './timeline-list-post/timeline-list-po
 @Component({
 	selector: 'insta-timeline-container',
 	standalone: true,
-	imports: [
-		CommonModule,
-		MatProgressSpinnerModule,
-		TimelineListPostComponent,
-		// TimelineListPostComponent
-	],
+	imports: [CommonModule, MatProgressSpinnerModule, TimelineListPostComponent],
 	template: `
 		<!--  MANUAL SUBSCRIPTION    -->
 		<!--    <div *ngFor="let post of posts">-->

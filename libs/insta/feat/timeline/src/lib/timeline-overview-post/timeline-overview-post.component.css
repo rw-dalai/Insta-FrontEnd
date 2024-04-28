@@ -1,0 +1,10 @@
+:host {
+  display: block;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+
+mat-card-header, mat-card-content {
+  padding: 10px;
+}
