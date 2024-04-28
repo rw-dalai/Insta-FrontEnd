@@ -39,6 +39,15 @@ import { HttpClient } from '@angular/common/http';
 //  - Content-Type: image/jpeg
 //  - Response Body: binary data
 
+// What is a Directive?
+// ----------------------------------------------------------------------------
+// A directive is a class with a @Directive decorator.
+// It is used to add behavior to an existing element in the DOM.
+
+// What is ElementRef?
+// ----------------------------------------------------------------------------
+// ElementRef is a class that wraps a native element in the DOM.
+
 @Directive({
 	selector: '[authImage]',
 	standalone: true,
