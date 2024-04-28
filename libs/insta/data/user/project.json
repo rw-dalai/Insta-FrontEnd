@@ -3,15 +3,12 @@
 	"$schema": "../../../../node_modules/nx/schemas/project-schema.json",
 	"sourceRoot": "libs/insta/data/user/src",
 	"prefix": "insta",
-	"tags": [],
 	"projectType": "library",
+	"tags": [],
 	"targets": {
 		"lint": {
-			"executor": "@nx/linter:eslint",
-			"outputs": ["{options.outputFile}"],
-			"options": {
-				"lintFilePatterns": ["libs/insta/data/user/**/*.ts", "libs/insta/data/user/**/*.html"]
-			}
+			"executor": "@nx/eslint:lint",
+			"outputs": ["{options.outputFile}"]
 		}
 	}
 }

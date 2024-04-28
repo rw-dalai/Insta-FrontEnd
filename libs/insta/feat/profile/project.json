@@ -3,22 +3,15 @@
 	"$schema": "../../../../node_modules/nx/schemas/project-schema.json",
 	"sourceRoot": "libs/insta/feat/profile/src",
 	"prefix": "insta",
-	"tags": [],
 	"projectType": "library",
+	"tags": [],
 	"targets": {
 		"test": {
 			"executor": "@nx/jest:jest",
 			"outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
 			"options": {
-				"jestConfig": "libs/insta/feat/profile/jest.config.ts",
-				"passWithNoTests": true
-			},
-			"configurations": {
-				"ci": {
-					"ci": true,
-					"codeCoverage": true
-				}
+				"jestConfig": "libs/insta/feat/profile/jest.config.ts"
 			}
 		}
-  }
+	}
 }

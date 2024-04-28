@@ -3,15 +3,12 @@
 	"$schema": "../../../../node_modules/nx/schemas/project-schema.json",
 	"sourceRoot": "libs/insta/feat/auth/src",
 	"prefix": "insta",
-	"tags": [],
 	"projectType": "library",
+	"tags": [],
 	"targets": {
 		"lint": {
-			"executor": "@nx/linter:eslint",
-			"outputs": ["{options.outputFile}"],
-			"options": {
-				"lintFilePatterns": ["libs/insta/feat/auth/**/*.ts", "libs/insta/feat/auth/**/*.html"]
-			}
+			"executor": "@nx/eslint:lint",
+			"outputs": ["{options.outputFile}"]
 		}
 	}
 }

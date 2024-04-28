@@ -46,7 +46,7 @@ import { PostDataModule } from '@insta/data/post';
 			}
 		),
 
-		StoreDevtoolsModule.instrument({ maxAge: 25 }),
+		StoreDevtoolsModule.instrument({ maxAge: 25, connectInZone: true }),
 
 		// Root Effects
 		EffectsModule.forRoot([]),

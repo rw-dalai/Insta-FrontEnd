@@ -3,18 +3,12 @@
 	"$schema": "../../../../node_modules/nx/schemas/project-schema.json",
 	"sourceRoot": "libs/insta/ui/strengthbar/src",
 	"prefix": "insta",
-	"tags": [],
 	"projectType": "library",
+	"tags": [],
 	"targets": {
 		"lint": {
-			"executor": "@nx/linter:eslint",
-			"outputs": ["{options.outputFile}"],
-			"options": {
-				"lintFilePatterns": [
-					"libs/insta/ui/strengthbar/**/*.ts",
-					"libs/insta/ui/strengthbar/**/*.html"
-				]
-			}
+			"executor": "@nx/eslint:lint",
+			"outputs": ["{options.outputFile}"]
 		}
 	}
 }

@@ -14,7 +14,7 @@ export interface HashTag {
 
 // new Date(1713085188000) -> "Sun Apr 14 2024 10:59:48 GMT+0200 (Central European Summer Time)"
 export interface Media {
-	id: string;
+	id: string; // dog.jpg
 	createdAt: number; // Backend sends: epoch millis
 	filename: string;
 	mimeType: string; // e.g. image/jpeg, image/png, video/mp4
