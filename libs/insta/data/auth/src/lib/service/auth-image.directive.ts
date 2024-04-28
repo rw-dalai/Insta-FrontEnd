@@ -36,7 +36,7 @@ import { HttpClient } from '@angular/common/http';
 
 // In our directive we fetch an image bytes from the server, get a Blob and create a Blob URL.
 // This is possible because the server sends:
-//  -Content-Type: image/jpeg
+//  - Content-Type: image/jpeg
 //  - Response Body: binary data
 
 @Directive({
