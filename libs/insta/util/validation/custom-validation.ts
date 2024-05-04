@@ -7,6 +7,15 @@ import * as zxcvbn from 'zxcvbn';
 
 // Technically this is a class, but it is used as a namespace for the static methods.
 export class CustomValidators {
+	static maxSize(length: number): ValidatorFn {
+		return function (control: AbstractControl): ValidationErrors | null {
+			// TODO implement
+
+			// if the value is long enough return null
+			return null;
+		};
+	}
+
 	/**
 	 * ONLY EXAMPLE: A Configured Validator
 	 * For checking if the value is at least the given length

@@ -5,6 +5,7 @@ import { Post, selectAllPost } from '@insta/data/post';
 import { Observable, tap } from 'rxjs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TimelineListPostComponent } from './timeline-list-post/timeline-list-post.component';
+import { TimelineSendMessageComponent } from './timeline-send-message/timeline-send-message.component';
 
 // - UI Designs
 // https://www.adhamdannaway.com/blog/ui-design/16-ui-design-rules
@@ -22,7 +23,12 @@ import { TimelineListPostComponent } from './timeline-list-post/timeline-list-po
 @Component({
 	selector: 'insta-timeline-container',
 	standalone: true,
-	imports: [CommonModule, MatProgressSpinnerModule, TimelineListPostComponent],
+	imports: [
+		CommonModule,
+		MatProgressSpinnerModule,
+		TimelineListPostComponent,
+		TimelineSendMessageComponent,
+	],
 	template: `
 		<!--  MANUAL SUBSCRIPTION    -->
 		<!--    <div *ngFor="let post of posts">-->
@@ -43,6 +49,9 @@ import { TimelineListPostComponent } from './timeline-list-post/timeline-list-po
 		<!-- ASYNC PIPE w. new Angular v17 Syntax  -->
 		@if (posts$ | async; as posts) {
 		<insta-timeline-list-post [posts]="posts"> </insta-timeline-list-post>
+
+		<insta-timeline-send-message> </insta-timeline-send-message>
+
 		} @else {
 		<mat-spinner></mat-spinner>
 		}

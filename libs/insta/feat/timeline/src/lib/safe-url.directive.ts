@@ -1,5 +1,12 @@
-import { Directive, ElementRef, Input, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {
+	Directive,
+	ElementRef,
+	Input,
+	OnChanges,
+	OnDestroy,
+	OnInit,
+	SimpleChanges,
+} from '@angular/core';
 
 // TYPES OF IMAGE URLS
 
@@ -48,18 +55,34 @@ import { HttpClient } from '@angular/common/http';
 // ----------------------------------------------------------------------------
 // ElementRef is a class that wraps a native element in the DOM.
 
+// file: File
+// This image
+// <img [safeUrl]="file">
+
 @Directive({
-	selector: '[authImage]',
+	selector: '[safeUrl]',
 	standalone: true,
 })
-export class AuthImageDirective implements OnInit {
-	@Input('authImage') imageUrl!: string;
+export class SafeUrlDirective implements OnChanges, OnInit, OnDestroy {
+	@Input('safeUrl') file!: File;
 
-	constructor(private element: ElementRef<HTMLImageElement>, private http: HttpClient) {}
+	url!: string;
 
-	ngOnInit() {
-		this.http
-			.get(this.imageUrl, { responseType: 'blob' })
-			.subscribe((imageBlob) => (this.element.nativeElement.src = URL.createObjectURL(imageBlob)));
+	// 1.
+	constructor(private element: ElementRef<HTMLImageElement>) {}
+
+	// 2. Called whenever the input props are changing
+	ngOnChanges(): void {
+		console.log('SafeUrlDirective#onChanges', this.file);
+		this.url = URL.createObjectURL(this.file);
+		this.element.nativeElement.src = this.url;
+	}
+
+	// 3.Called after the first OnChanges
+	ngOnInit(): void {}
+
+	// 4. Called whenever Angular destroys the component in the DOM, e.g. we route away
+	ngOnDestroy(): void {
+		URL.revokeObjectURL(this.url);
 	}
 }
