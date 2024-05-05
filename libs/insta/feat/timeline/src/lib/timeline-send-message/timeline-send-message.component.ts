@@ -41,10 +41,14 @@ export class TimelineSendMessageComponent {
 		return this.sendMessageForm.controls.files;
 	}
 
-	// Called whenever the user chooses new files;
-	// We push them into the files form array
+	// Called whenever the user chooses new files
 	onFileChange(event: Event) {
+		// We push them into the files form array
 		this.pushFiles(this.getFiles(event));
+
+		// Clear the value of the file input to allow re-selection of the same file(s).
+		// Otherwise the `change` event is not fired, if we re-select the same file(s).
+		(event.target as HTMLInputElement).value = '';
 	}
 
 	// Extracts the files
