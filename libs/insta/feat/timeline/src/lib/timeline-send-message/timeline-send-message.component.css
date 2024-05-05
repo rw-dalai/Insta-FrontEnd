@@ -1,0 +1,55 @@
+:host {
+  display: block;
+  padding: 20px;
+}
+
+.file-preview {
+  margin-bottom: 20px;
+  width: 100%;
+  min-height: 150px;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  border: 1px solid #ccc;
+}
+
+.file-preview__item {
+  position: relative;
+  margin-right: 5px;
+
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+}
+
+.file-preview__image {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.file-preview__delete {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 25px;
+  height: 25px;
+  z-index: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+  background-color: indianred;
+
+  cursor: pointer;
+}
+
+.file-preview__name {
+  overflow: hidden;
+  /*white-space: nowrap;*/
+  text-overflow: ellipsis;
+}

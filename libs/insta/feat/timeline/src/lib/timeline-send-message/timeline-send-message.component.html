@@ -1,0 +1,45 @@
+<form [formGroup]="sendMessageForm" (ngSubmit)="onSendMessage()">
+	<!-- FILE PREVIEWS -->
+	<div class="file-preview">
+		<!-- Angular v17 @for   -->
+		@for (fileCtrl of filesCtrl.controls;track fileCtrl) {
+
+		<!-- Preview  -->
+		<div class="file-preview__item">
+			<!-- Image -->
+			<img
+				class="file-preview__image"
+				[safeUrl]="fileCtrl.value"
+				[class.file-preview__item--invalid]="fileCtrl.invalid"
+			/>
+
+			<!-- Info -->
+			<span class="file-preview__name">{{ fileCtrl.value.name }}</span>
+			<span>{{ fileCtrl.value.size | fileSize }}</span>
+			<span>{{ fileCtrl.value.type }}</span>
+
+			<div class="file-preview__delete" (click)="onFileDelete($index)">x</div>
+
+			<!-- Try NOT TO USE functions in the Component -->
+			<!-- <span>{{ getReadableFilesize(fileCtrl.value.size)  }}</span>-->
+
+			<!-- Try TO USE pipes in the Component -->
+			<!-- <span>{{ fileCtrl.value.size | fileSize }}</span>-->
+
+			<!-- Angular Build in Pipes -->
+			<!-- <span>{{ "Rene" | lowercase  }}</span>-->
+			<!-- <span>{{ sendMessageForm.value | json  }}</span>-->
+			<!-- <span>{{  today | date:'shortDate'  }}</span>-->
+		</div>
+		}
+	</div>
+
+	<!-- INPUT TEXT-->
+	<!-- TODO -->
+
+	<!-- INPUT MEDIA-->
+	<!--<input type="file" multiple accept="*/*">-->
+	<input type="file" multiple accept="image/*" (change)="onFileChange($event)" />
+
+	<button type="submit" [disabled]="sendMessageForm.invalid">Send</button>
+</form>

@@ -7,11 +7,23 @@ import * as zxcvbn from 'zxcvbn';
 
 // Technically this is a class, but it is used as a namespace for the static methods.
 export class CustomValidators {
-	static maxSize(length: number): ValidatorFn {
-		return function (control: AbstractControl): ValidationErrors | null {
-			// TODO implement
+	/**
+	 * Validator for checking the maximum file size
+	 * @param maxSize of a file
+	 */
+	static maxSize(maxSize: number): ValidatorFn {
+		return function (control: AbstractControl<File>): ValidationErrors | null {
+			const file: File = control.value;
 
-			// if the value is long enough return null
+			if (file.size > maxSize) {
+				return {
+					maxSize: {
+						size: file.size,
+						message: `File is too large. Max ${maxSize} bytes.`,
+					},
+				};
+			}
+
 			return null;
 		};
 	}

@@ -47,9 +47,12 @@ import { TimelineSendMessageComponent } from './timeline-send-message/timeline-s
 		<!--		</ng-template>-->
 
 		<!-- ASYNC PIPE w. new Angular v17 Syntax  -->
-		@if (posts$ | async; as posts) {
+		@if (posts$ | async;as posts) {
+
+		<!-- TIMELINE -->
 		<insta-timeline-list-post [posts]="posts"> </insta-timeline-list-post>
 
+		<!-- SEND MESSAGE -->
 		<insta-timeline-send-message> </insta-timeline-send-message>
 
 		} @else {
