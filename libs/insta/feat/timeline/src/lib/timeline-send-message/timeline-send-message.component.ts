@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import {
 	FormArray,
 	FormBuilder,
@@ -10,6 +10,8 @@ import { SafeUrlDirective } from '../safe-url.directive';
 import { CustomValidators } from '@insta/util';
 import { FileSizePipe } from '../file-size.pipe';
 import { DatePipe, JsonPipe, LowerCasePipe, UpperCasePipe } from '@angular/common';
+import { SearchbarComponent } from '@insta/ui/searchbar';
+import { SendMessageFormData } from '../model/send-message-view.model';
 
 @Component({
 	selector: 'insta-timeline-send-message',
@@ -22,23 +24,26 @@ import { DatePipe, JsonPipe, LowerCasePipe, UpperCasePipe } from '@angular/commo
 		JsonPipe,
 		LowerCasePipe,
 		DatePipe,
+		SearchbarComponent,
 	],
 	templateUrl: './timeline-send-message.component.html',
 	styleUrl: './timeline-send-message.component.css',
 })
 export class TimelineSendMessageComponent {
-	MAX_FILE_SIZE = 5 * 1024 * 1024;
+	MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+
+	@Output() sendMessage = new EventEmitter<SendMessageFormData>();
 
 	fb = inject(FormBuilder);
 
 	sendMessageForm = this.fb.nonNullable.group({
 		message: ['default message', Validators.required],
-		files: new FormArray<FormControl<File>>([], [Validators.maxLength(10)]),
+		medias: new FormArray<FormControl<File>>([], [Validators.maxLength(10)]),
 	});
 
 	get filesCtrl() {
 		// return this.sendMessageForm.get('files') as FormArray<FormControl<File>>
-		return this.sendMessageForm.controls.files;
+		return this.sendMessageForm.controls.medias;
 	}
 
 	// Called whenever the user chooses new files
@@ -76,6 +81,8 @@ export class TimelineSendMessageComponent {
 
 	// When the user presses the send button
 	onSendMessage() {
-		console.log('SendMessage', this.sendMessageForm.value);
+		// console.log('SendMessage', this.sendMessageForm.value);
+
+		this.sendMessage.emit(this.sendMessageForm.value as SendMessageFormData);
 	}
 }

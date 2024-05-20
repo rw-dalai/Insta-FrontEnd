@@ -1,3 +1,5 @@
 @for (post of posts; track post.id) {
 <insta-timeline-overview-post [post]="post"> </insta-timeline-overview-post>
+} @empty {
+<p>Sorry, there are no posts on Instagram, feel free to make the first post</p>
 }

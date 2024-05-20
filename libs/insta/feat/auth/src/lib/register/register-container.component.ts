@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 	selector: 'insta-register-container',
 	standalone: true,
 	imports: [CommonModule, RegisterComponent],
-	template: `<insta-register (register)="onRegister($event)"></insta-register>`,
+	template: ` <insta-register (register)="onRegister($event)"> </insta-register>`,
 	styles: [],
 })
 export class RegisterContainerComponent {

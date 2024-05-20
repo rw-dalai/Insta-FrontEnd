@@ -140,11 +140,11 @@ export class RegisterComponent {
 	// Type Safe Forms from Angular v14 ---------------------
 	// registerForm = inject(FormBuilder).nonNullable.group({
 	registerForm: FormGroup<RegisterFormType> = inject(FormBuilder).nonNullable.group({
-		email: ['', [Validators.required, Validators.email]],
-		password: ['', [Validators.required, CustomValidators.passwordStrength(3)]],
-		passwordConfirm: ['', [Validators.required, CustomValidators.match('password')]],
-		firstName: ['', [Validators.required, Validators.minLength(1)]],
-		lastName: ['', [Validators.required, Validators.minLength(1)]],
+		email: ['lol@gmx.at', [Validators.required, Validators.email]],
+		password: ['spengergasse', [Validators.required, CustomValidators.passwordStrength(3)]],
+		passwordConfirm: ['spengergasse', [Validators.required, CustomValidators.match('password')]],
+		firstName: ['Rene', [Validators.required, Validators.minLength(1)]],
+		lastName: ['Wenz', [Validators.required, Validators.minLength(1)]],
 	});
 
 	// Gets the control by name in a typesafe way
@@ -176,7 +176,7 @@ export class RegisterComponent {
 
 	// Called when the register button is clicked
 	onRegister() {
-		// console.log('form object', this.registerForm);
+		console.log('form object', this.registerForm.value);
 		this.register.emit(this.registerForm.value as RegisterFormData);
 	}
 }

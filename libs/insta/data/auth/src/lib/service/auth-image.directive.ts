@@ -31,7 +31,7 @@ import { HttpClient } from '@angular/common/http';
 // Using one of those API's: Canvas, WebRTC, File API, etc.
 
 // const blob = new Blob([binaryData], {type: 'image/jpeg'});
-// const url = URL.createObjectURL(blob);
+// const url = URL.createObjectURL(file);
 // document.querySelector('img').src = url;
 
 // In our directive we fetch an image bytes from the server, get a Blob and create a Blob URL.
